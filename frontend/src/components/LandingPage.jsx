@@ -17,10 +17,12 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -33,7 +35,24 @@ const LandingPage = () => {
 
   useEffect(() => {
     fetchGalleryImages();
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
   }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    if (!darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
   const fetchGalleryImages = async () => {
     try {
