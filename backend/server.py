@@ -166,7 +166,7 @@ async def root():
 @api_router.post("/admin/login")
 async def admin_login(credentials: AdminLogin):
     """Verify admin credentials"""
-    is_valid = verify_admin_credentials(credentials.username, credentials.password)
+    is_valid = await verify_admin_credentials(credentials.username, credentials.password)
     if not is_valid:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     return {"success": True, "message": "Login successful"}
@@ -174,23 +174,21 @@ async def admin_login(credentials: AdminLogin):
 @api_router.post("/admin/change-password", response_model=AdminPasswordChangeResponse)
 async def admin_change_password(password_change: AdminPasswordChange):
     """
-    Change admin password
-    Returns new password hash that should be set in ADMIN_PASSWORD_HASH environment variable
+    Change admin password - now updates database directly
     """
-    success, result = change_admin_password(
+    success, message = await change_admin_password(
         password_change.old_password,
         password_change.new_password,
         password_change.username
     )
     
     if not success:
-        raise HTTPException(status_code=400, detail=result)
+        raise HTTPException(status_code=400, detail=message)
     
-    # result is the new password hash
     return AdminPasswordChangeResponse(
         success=True,
-        message="Password changed successfully. Please update ADMIN_PASSWORD_HASH in your .env file with the provided hash.",
-        new_password_hash=result
+        message="Password changed successfully! You can now login with your new password.",
+        new_password_hash=None  # No longer needed as it's stored in DB
     )
 
 # Include the router in the main app
