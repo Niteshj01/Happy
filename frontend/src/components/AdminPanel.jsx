@@ -167,10 +167,20 @@ const AdminPanel = ({ onLogout }) => {
               <h1 className="text-2xl font-bold text-gray-900">Admin Panel</h1>
               <p className="text-sm text-gray-600">Happy Teeth Dental Clinic</p>
             </div>
-            <Button onClick={handleLogout} variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </Button>
+            <div className="flex items-center space-x-3">
+              <Button 
+                onClick={() => setShowPasswordDialog(true)} 
+                variant="outline" 
+                className="border-blue-600 text-blue-600 hover:bg-blue-50"
+              >
+                <Key className="w-4 h-4 mr-2" />
+                Change Password
+              </Button>
+              <Button onClick={handleLogout} variant="outline" className="border-red-600 text-red-600 hover:bg-red-50">
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
