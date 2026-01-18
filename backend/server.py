@@ -136,6 +136,13 @@ async def update_appointment_status(appointment_id: str, status_update: Appointm
     
     return Appointment(**updated_appointment)
 
+@api_router.delete("/appointments/{appointment_id}")
+async def delete_appointment(appointment_id: str):
+    result = await db.appointments.delete_one({"id": appointment_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Appointment not found")
+    return {"message": "Appointment deleted successfully"}
+
 
 # Gallery Routes
 @api_router.get("/gallery", response_model=List[GalleryImage])
