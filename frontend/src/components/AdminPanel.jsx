@@ -313,6 +313,15 @@ const AdminPanel = ({ onLogout }) => {
                               <XCircle className="w-4 h-4 mr-1" />
                               Cancel
                             </Button>
+                            <Button 
+                              onClick={() => handleDeleteAppointment(appointment.id, appointment.name)}
+                              size="sm"
+                              variant="outline"
+                              className="border-gray-600 text-gray-600 hover:bg-gray-50"
+                            >
+                              <Trash2 className="w-4 h-4 mr-1" />
+                              Delete
+                            </Button>
                           </div>
                         </div>
                       </CardContent>
