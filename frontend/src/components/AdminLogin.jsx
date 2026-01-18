@@ -3,24 +3,36 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { LogIn } from 'lucide-react';
-import { adminCredentials } from '../mock';
 import { toast } from 'sonner';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const AdminLogin = ({ onLogin }) => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (credentials.username === adminCredentials.username && 
-        credentials.password === adminCredentials.password) {
-      localStorage.setItem('adminAuth', 'true');
-      onLogin(true);
-      toast.success('Welcome to Admin Panel!');
-    } else {
-      toast.error('Invalid credentials');
+    setLoading(true);
+    
+    try {
+      const response = await axios.post(`${API}/admin/login`, credentials);
+      if (response.data.success) {
+        localStorage.setItem('adminAuth', 'true');
+        localStorage.setItem('adminUsername', credentials.username);
+        onLogin(true);
+        toast.success('Welcome to Admin Panel!');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('Invalid credentials. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
