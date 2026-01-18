@@ -126,11 +126,7 @@ const AdminPanel = ({ onLogout }) => {
       });
       
       if (response.data.success) {
-        toast.success('Password changed successfully!');
-        if (response.data.new_password_hash) {
-          // Show the hash in a dialog for the admin to update .env
-          alert(`Password changed! Please update your .env file with:\n\nADMIN_PASSWORD_HASH=${response.data.new_password_hash}\n\nThen restart the backend server.`);
-        }
+        toast.success('Password changed successfully! You can now login with your new password.');
         setShowPasswordDialog(false);
         setPasswordForm({ oldPassword: '', newPassword: '', confirmPassword: '' });
       }
