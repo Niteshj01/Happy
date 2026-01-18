@@ -162,6 +162,37 @@ async def delete_gallery_image(image_id: str):
 async def root():
     return {"message": "Happy Teeth Dental Clinic API", "status": "active"}
 
+# Admin Authentication Routes
+@api_router.post("/admin/login")
+async def admin_login(credentials: AdminLogin):
+    """Verify admin credentials"""
+    is_valid = verify_admin_credentials(credentials.username, credentials.password)
+    if not is_valid:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    return {"success": True, "message": "Login successful"}
+
+@api_router.post("/admin/change-password", response_model=AdminPasswordChangeResponse)
+async def admin_change_password(password_change: AdminPasswordChange):
+    """
+    Change admin password
+    Returns new password hash that should be set in ADMIN_PASSWORD_HASH environment variable
+    """
+    success, result = change_admin_password(
+        password_change.old_password,
+        password_change.new_password,
+        password_change.username
+    )
+    
+    if not success:
+        raise HTTPException(status_code=400, detail=result)
+    
+    # result is the new password hash
+    return AdminPasswordChangeResponse(
+        success=True,
+        message="Password changed successfully. Please update ADMIN_PASSWORD_HASH in your .env file with the provided hash.",
+        new_password_hash=result
+    )
+
 # Include the router in the main app
 app.include_router(api_router)
 
