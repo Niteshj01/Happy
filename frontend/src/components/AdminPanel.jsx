@@ -63,6 +63,19 @@ const AdminPanel = ({ onLogout }) => {
     }
   };
 
+  const handleDeleteAppointment = async (id, patientName) => {
+    if (window.confirm(`Are you sure you want to delete the appointment for ${patientName}? This action cannot be undone.`)) {
+      try {
+        await axios.delete(`${API}/appointments/${id}`);
+        loadData();
+        toast.success('Appointment deleted successfully');
+      } catch (error) {
+        console.error('Error deleting appointment:', error);
+        toast.error('Failed to delete appointment');
+      }
+    }
+  };
+
   const handleImageUpload = async (e) => {
     e.preventDefault();
     if (!imageUploadUrl || !imageTitle) {
