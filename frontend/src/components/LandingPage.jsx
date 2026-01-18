@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { 
   Phone, Mail, MapPin, Clock, Star, Award, Zap, Heart, 
   Shield, Sparkles, Activity, Menu, X, ChevronRight
@@ -18,6 +19,7 @@ const LandingPage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [galleryImages, setGalleryImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
