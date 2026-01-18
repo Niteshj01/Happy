@@ -6,11 +6,12 @@ import { Textarea } from './ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { 
   Phone, Mail, MapPin, Clock, Star, Award, Zap, Heart, 
-  Shield, Sparkles, Activity, Menu, X, ChevronRight
+  Shield, Sparkles, Activity, Menu, X, ChevronRight, Moon, Sun
 } from 'lucide-react';
 import { businessInfo, services, whyChooseUs, mockReviews } from '../mock';
 import { toast } from 'sonner';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
