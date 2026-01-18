@@ -79,6 +79,20 @@ class GalleryImage(BaseModel):
     category: ImageCategory
     createdAt: datetime = Field(default_factory=datetime.utcnow)
 
+class AdminLogin(BaseModel):
+    username: str
+    password: str
+
+class AdminPasswordChange(BaseModel):
+    username: str
+    old_password: str
+    new_password: str
+
+class AdminPasswordChangeResponse(BaseModel):
+    success: bool
+    message: str
+    new_password_hash: Optional[str] = None
+
 
 # Appointment Routes
 @api_router.post("/appointments", response_model=Appointment)
