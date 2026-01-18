@@ -472,36 +472,36 @@ const LandingPage = () => {
       </section>
 
       {/* Location Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Visit Us</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">Visit Us</h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <MapPin className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
-                    <p className="text-gray-600">{businessInfo.address}</p>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Address</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{businessInfo.address}</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <Phone className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href={`tel:${businessInfo.phone}`} className="text-blue-600 hover:underline">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Phone</h3>
+                    <a href={`tel:${businessInfo.phone}`} className="text-blue-600 dark:text-blue-400 hover:underline">
                       {businessInfo.phone}
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <Clock className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+                  <Clock className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Hours</h3>
-                    <div className="space-y-1 text-gray-600">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Hours</h3>
+                    <div className="space-y-1 text-gray-600 dark:text-gray-400">
                       <p>Monday - Saturday: 9:00 AM - 9:00 PM</p>
                       <p>Sunday: 10:00 AM - 6:00 PM</p>
-                      <span className="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium mt-2">
+                      <span className="inline-block bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-3 py-1 rounded-full text-sm font-medium mt-2">
                         Open Now
                       </span>
                     </div>
@@ -532,7 +532,7 @@ const LandingPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Book Your Appointment</h2>
             <p className="text-xl text-blue-100">Take the first step towards a healthier, brighter smile</p>
           </div>
-          <Card className="border-0 shadow-2xl">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
