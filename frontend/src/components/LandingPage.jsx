@@ -140,6 +140,14 @@ const LandingPage = () => {
             </nav>
 
             <div className="hidden md:flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleDarkMode}
+                className="rounded-full"
+              >
+                {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </Button>
               <a href={`tel:${businessInfo.phone}`}>
                 <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
                   <Phone className="w-4 h-4 mr-2" />
