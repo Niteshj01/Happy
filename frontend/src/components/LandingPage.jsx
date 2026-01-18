@@ -177,6 +177,14 @@ const LandingPage = () => {
                 <button onClick={() => scrollToSection('reviews')} className="text-left text-gray-700 hover:text-blue-600">Reviews</button>
                 <button onClick={() => scrollToSection('gallery')} className="text-left text-gray-700 hover:text-blue-600">Gallery</button>
                 <button onClick={() => scrollToSection('contact')} className="text-left text-gray-700 hover:text-blue-600">Contact</button>
+                <Button 
+                  variant="outline" 
+                  onClick={toggleDarkMode}
+                  className="w-full justify-start"
+                >
+                  {darkMode ? <Sun className="w-4 h-4 mr-2" /> : <Moon className="w-4 h-4 mr-2" />}
+                  {darkMode ? 'Light Mode' : 'Dark Mode'}
+                </Button>
                 <a href={`tel:${businessInfo.phone}`}>
                   <Button variant="outline" className="w-full border-blue-600 text-blue-600">
                     <Phone className="w-4 h-4 mr-2" />
