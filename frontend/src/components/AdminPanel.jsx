@@ -103,6 +103,45 @@ const AdminPanel = ({ onLogout }) => {
     }
   };
 
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast.error('New passwords do not match');
+      return;
+    }
+    
+    if (passwordForm.newPassword.length < 6) {
+      toast.error('New password must be at least 6 characters');
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      const username = localStorage.getItem('adminUsername') || 'admin';
+      const response = await axios.post(`${API}/admin/change-password`, {
+        username: username,
+        old_password: passwordForm.oldPassword,
+        new_password: passwordForm.newPassword
+      });
+      
+      if (response.data.success) {
+        toast.success('Password changed successfully!');
+        if (response.data.new_password_hash) {
+          // Show the hash in a dialog for the admin to update .env
+          alert(`Password changed! Please update your .env file with:\n\nADMIN_PASSWORD_HASH=${response.data.new_password_hash}\n\nThen restart the backend server.`);
+        }
+        setShowPasswordDialog(false);
+        setPasswordForm({ oldPassword: '', newPassword: '', confirmPassword: '' });
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+      toast.error(error.response?.data?.detail || 'Failed to change password');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const getStatusColor = (status) => {
     switch(status) {
       case 'confirmed': return 'bg-green-100 text-green-700';
