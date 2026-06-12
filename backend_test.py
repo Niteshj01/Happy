@@ -10,7 +10,7 @@ import sys
 from datetime import datetime, timedelta
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://dental-excellence-3.preview.emergentagent.com/api"
+BACKEND_URL = "https://creds-verify.preview.emergentagent.com/api"
 
 class DentalClinicAPITester:
     def __init__(self):
